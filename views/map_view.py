@@ -6,8 +6,10 @@ recolors its single PatchCollection with set_array, so it stays responsive.
 
 Weeks 1-2: choropleth of CO2 (territorial or consumption basis) recolored by year,
 no-data countries in grey, continent filter dims other continents, selected
-countries get a dark outline. Click-to-select, metric menu, diverging scale and
-tooltips come in weeks 3-4.
+countries get a dark outline. Click a country to toggle it in the shared
+selection, click the ocean to clear it (same rule as view B), so selecting in A
+highlights in every other view. Metric menu, diverging scale and tooltips come in
+weeks 3-4.
 """
 import matplotlib
 import numpy as np
@@ -32,6 +34,7 @@ class MapPanel(QtWidgets.QWidget, BaseView):
         self.world = load_countries(map_file)
         self.collection = None
         self.metric = 'total'
+        self.in_table = np.zeros(len(self.world), bool)
 
         self.figure = Figure(figsize=(11, 5.5))
         self.canvas = FigureCanvasQTAgg(self.figure)
@@ -39,10 +42,12 @@ class MapPanel(QtWidgets.QWidget, BaseView):
         layout = QtWidgets.QVBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.addWidget(self.canvas)
+        self.canvas.mpl_connect('button_press_event', self._on_click)
 
     def draw(self, df):
         countries = self.world['iso3'].tolist()
         report_unmatched(df['iso3'].unique(), self.world)
+        self.in_table = self.world['iso3'].isin(df['iso3']).to_numpy()
 
         # country x year grids, aligned to the patch order
         years = list(range(YEAR_MIN, YEAR_MAX + 1))
@@ -90,3 +95,27 @@ class MapPanel(QtWidgets.QWidget, BaseView):
         self.colorbar.set_label(label)
         self.ax.set_title(f'{label}, {state.year}')
         self.canvas.draw_idle()
+
+    # ------------------------------------------------------------ interaction
+    def country_at(self, event):
+        """Row in self.world of the country under the mouse, or None (HW3 picking)."""
+        if self.collection is None or event.inaxes is not self.ax:
+            return None
+        hit, info = self.collection.contains(event)
+        if not hit:
+            return None
+        state = self.model.state
+        for i in info['ind'][::-1]:   # the last one drawn is on top
+            in_continent = state.continent is None or self.world['continent'].iat[i] == state.continent
+            if self.in_table[i] and in_continent:
+                return int(i)
+        return None
+
+    def _on_click(self, event):
+        if event.button != 1 or event.inaxes is not self.ax:
+            return
+        i = self.country_at(event)
+        if i is None:
+            self.model.clear_selection()
+        else:
+            self.model.toggle(self.world['iso3'].iat[i])
