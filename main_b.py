@@ -10,7 +10,7 @@ import argparse
 
 from PyQt5 import QtWidgets, QtCore
 
-from data_minimal import load_table
+from data import load_table
 from selection import CONTINENTS, YEAR_MAX, YEAR_MIN, SelectionModel
 from views.bubble_view import BubblePanel
 

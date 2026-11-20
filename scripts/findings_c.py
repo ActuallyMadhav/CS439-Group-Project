@@ -22,7 +22,7 @@ from matplotlib.figure import Figure
 from matplotlib.ticker import FixedLocator, FuncFormatter, NullLocator
 
 import metrics
-from data_minimal import load_table
+from data import WORLD, load_table
 
 YEAR = 2022
 COMPARE_YEAR = 1990
@@ -192,7 +192,7 @@ Within rich countries (GDP > $32k per person in {YEAR}):
 
 Full tables: `q3_wealth_curve.csv`, `q3_rich_country_peaks.csv`.
 """
-    with open(os.path.join(out, 'findings.md'), 'w') as f:
+    with open(os.path.join(out, 'findings.md'), 'w', encoding='utf-8') as f:
         f.write(text)
 
 
@@ -204,7 +204,8 @@ def main():
     args = p.parse_args()
     os.makedirs(args.out, exist_ok=True)
 
-    df = metrics.add_metrics(load_table(args.input, args.map_file))
+    df = load_table(args.input, args.map_file)
+    df = metrics.add_metrics(df[df['iso3'] != WORLD])   # countries only, not the World row
     s1 = q1(df)
     s1.to_csv(os.path.join(args.out, f'q1_decoupling_{YEAR}.csv'), index=False)
 

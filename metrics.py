@@ -1,7 +1,7 @@
 """Derived metrics shared by the team (owner: Shivam Rastogi).
 
 Pure pandas, no GUI code, so any view (or a findings script) can use it.
-Input is the tidy table from data_minimal.load_table / Saanvi's data.py with the
+Input is the tidy table from data.load_table (Saanvi) with the
 shared column names:
     iso3, country, continent, year, population, gdp, gdp_pc,
     co2, co2_pc, cons_co2, cons_co2_pc

@@ -1,16 +1,37 @@
-"""Shared country-year table for all five views (1990–2022)."""
+"""Shared country-year table for all five views, 1990–2022 (owner: Saanvi Khemka).
+
+    df = load_table(co2_file, map_file, energy_file)
+
+One row per country per year (plus World as iso3 'OWID_WRL', continent None) with
+the shared column names used by every view:
+    iso3, country, continent, year, population, gdp, gdp_pc, co2, co2_pc,
+    cons_co2, cons_co2_pc, net_imported_co2, <fuel>_co2, <source>_share_elec, ...
+"""
 from pathlib import Path
 import pandas as pd
 import geopandas as gpd
 
-YEAR_MIN, YEAR_MAX = 1990, 2022
+from map_geometry import NE_TO_OWID, SEVEN_SEAS_FIX
+from selection import YEAR_MIN, YEAR_MAX
+
+OWID_TO_NE = {owid: ne for ne, owid in NE_TO_OWID.items()}
+# Natural Earth draws these territories as part of France, the Netherlands or
+# Australia, so they have no shape (and no continent) of their own.
+NO_SHAPE_CONTINENT = {'GLP': 'North America', 'MTQ': 'North America', 'BES': 'North America',
+                      'GUF': 'South America', 'REU': 'Africa', 'MYT': 'Africa', 'CXR': 'Asia'}
+WORLD = 'OWID_WRL'
+
 
 def load_world(filename):
     return gpd.read_file(filename)
 
+
 def continent_lookup(world):
-    lookup = dict(zip(world["ADM0_A3"], world["CONTINENT"]))
-    lookup.update({"MUS": "Africa", "SYC": "Africa", "MDV": "Asia", "SHN": "Africa"})
+    """OWID iso3 -> continent, from Natural Earth plus the hand-made fixes."""
+    lookup = {NE_TO_OWID.get(code, code): cont
+              for code, cont in zip(world["ADM0_A3"], world["CONTINENT"])}
+    lookup.update(SEVEN_SEAS_FIX)
+    lookup.update(NO_SHAPE_CONTINENT)
     return lookup
 
 FUEL_COLUMNS = ('coal_co2', 'oil_co2', 'gas_co2', 'cement_co2', 'flaring_co2')
@@ -31,7 +52,7 @@ def build_table(co2_file, energy_file, map_file):
     ].copy()
 
     # Assign a consistent identifier for World.
-    world["iso_code"] = "OWID_WRL"
+    world["iso_code"] = WORLD
 
     # Combine individual countries and World.
     df = pd.concat([countries, world], ignore_index=True)
@@ -39,7 +60,7 @@ def build_table(co2_file, energy_file, map_file):
         raise ValueError('Duplicate country/year rows in CO2 source')
 
     lookup = continent_lookup(load_world(map_file))
-    df['continent'] = df.iso_code.map(lambda code: lookup.get({'SSD': 'SDS', 'PSE': 'PSX'}.get(code, code)))
+    df['continent'] = df.iso_code.map(lookup)
     df['gdp_pc'] = df.gdp / df.population.replace(0, float('nan'))
     df['co2_pc'] = df.co2 * 1e6 / df.population.replace(0, float('nan'))
     df['cons_co2_pc'] = df.consumption_co2 * 1e6 / df.population.replace(0, float('nan'))
@@ -53,13 +74,13 @@ def build_table(co2_file, energy_file, map_file):
     fields = [c for c in ENERGY_COLUMNS if c in energy.columns]
     if 'low_carbon_share_elec' not in fields:
         raise ValueError('Energy dataset missing low_carbon_share_elec')
-   # Handle World rows when the country column is available.
+    # Handle World rows when the country column is available.
     # The smaller test dataset may not contain this column.
     if 'country' in energy.columns:
         energy.loc[
             energy['country'] == 'World',
             'iso_code'
-        ] = 'OWID_WRL'
+        ] = WORLD
 
     # Keep only the columns needed for the merge.
     energy = energy.loc[:, ['iso_code', 'year'] + fields].copy()

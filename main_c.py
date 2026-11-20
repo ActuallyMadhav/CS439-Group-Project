@@ -11,7 +11,7 @@ import argparse
 
 from PyQt5 import QtWidgets
 
-from data_minimal import load_table
+from data import load_table
 from main_b import ControlBar
 from metrics import add_metrics
 from selection import CONTINENTS, YEAR_MAX, SelectionModel

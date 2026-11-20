@@ -9,7 +9,7 @@ import argparse
 
 from PyQt5 import QtWidgets
 
-from data_minimal import load_table
+from data import load_table
 from main_b import ControlBar
 from selection import CONTINENTS, YEAR_MAX, SelectionModel
 from views.map_view import MapPanel

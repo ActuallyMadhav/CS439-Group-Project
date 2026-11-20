@@ -75,7 +75,7 @@ def test_classes():
 
 
 def test_real(co2_file=None, map_file=None):
-    from data_minimal import load_table
+    from data import load_table
     co2_file = co2_file or os.path.join(RAW, 'owid-co2-data.csv')
     map_file = map_file or os.path.join(RAW, 'ne_50m_admin_0_countries.geojson')
     df = add_metrics(load_table(co2_file, map_file))
