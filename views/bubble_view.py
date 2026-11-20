@@ -14,8 +14,9 @@
 #        "near-zero drag clears the selection", grey EXCLUDED_COLOR for unselected points
 #   HW3  SizeLegend / fmt_number, node_areas-style sizing, build artists once and
 #        update them with set_offsets, blit-based HoverTooltip (red ring + box that
-#        flips toward the centre). The hit test now works in pixels via transData
-#        because our axes are log-scaled (HW3 assumed linear lon/lat axes).
+#        flips toward the centre), now shared by all views in tooltip.py. The hit
+#        test works in pixels via transData because our axes are log-scaled
+#        (HW3 assumed linear lon/lat axes).
 import math
 
 import numpy as np
@@ -28,12 +29,11 @@ from matplotlib.widgets import RectangleSelector
 from PyQt5 import QtWidgets
 
 from selection import BaseView, CONTINENTS, YEAR_MIN, YEAR_MAX
+from tooltip import (CONTINENT_COLORS, EXCLUDED_COLOR, SELECTED_LW, UNSELECTED_LW,
+                     HoverTooltip, country_text, rgb as _rgb)
 
-# HW1-style category colors (Okabe-Ito: safe for color-vision deficiencies)
-CONTINENT_COLORS = {'Africa': '#E69F00', 'Asia': '#D55E00', 'Europe': '#0072B2',
-                    'North America': '#CC79A7', 'South America': '#009E73',
-                    'Oceania': '#56B4E9'}
-EXCLUDED_COLOR = (0.75, 0.75, 0.75)   # HW2
+# Continent colors, grey for excluded points and the hover tooltip are the team's
+# shared style (tooltip.py), so every view highlights the same way.
 
 X_LIM = (300, 200_000)     # GDP per person, int-$ (2011 prices)
 Y_LIM = (0.02, 100)        # tonnes CO2 per person
@@ -44,7 +44,6 @@ BUBBLE_MIN_AREA = 8.0
 BUBBLE_MAX_AREA = 2600.0
 MAX_POPULATION = 1.45e9
 
-MIN_HOVER_RADIUS_PX = 5    # HW3
 CLICK_PX = 3               # a drag shorter than this is a click
 
 
@@ -85,98 +84,6 @@ def continent_legend(ax, anchor=(1.01, 0.52)):   # same pattern as HW3 node_colo
     return ax.legend(handles, CONTINENTS, title='Continent',
                      title_fontproperties={'weight': 'bold'}, loc='upper left',
                      bbox_to_anchor=anchor)
-
-
-class HoverTooltip:   # HW3, nodes only, pixel-space hit test for log axes
-
-    def __init__(self, fig, ax, node_text):
-        self.fig, self.ax, self.canvas = fig, ax, fig.canvas
-        self.node_text = node_text
-        self.background = None
-        self.current = None
-
-        self.annotation = ax.annotate(
-            '', xy=(0, 0), xytext=(15, 15), textcoords='offset points',
-            fontsize=8, family='monospace', multialignment='left', zorder=10, annotation_clip=False,
-            bbox=dict(boxstyle='round', fc='white', ec='black', alpha=0.92),
-            visible=False, animated=True)
-        self.node_ring = ax.scatter([], [], s=[], facecolors='none', edgecolors='red',
-                                    linewidths=2, zorder=9, visible=False, animated=True)
-        self.artists = (self.node_ring, self.annotation)
-        self.set_data(np.empty((0, 2)), np.empty(0), np.empty(0, int))
-
-        self.canvas.mpl_connect('draw_event', self._on_draw)
-        self.canvas.mpl_connect('motion_notify_event', self._on_motion)
-        self.canvas.mpl_connect('figure_leave_event', lambda e: self._show(None))
-
-    def set_data(self, node_xy, node_area, node_ids):
-        """Set what can currently be hovered (only visible, pickable bubbles)."""
-        self.node_xy = np.asarray(node_xy, float).reshape(-1, 2)
-        self.node_area = np.asarray(node_area, float)
-        self.node_ids = np.asarray(node_ids, int)
-        self.current = None
-        for artist in self.artists:
-            artist.set_visible(False)
-
-    def _on_draw(self, event):
-        self.background = self.canvas.copy_from_bbox(self.fig.bbox)
-        for artist in self.artists:
-            if artist.get_visible():
-                self.ax.draw_artist(artist)
-
-    def _blit(self):
-        if self.background is None:
-            self.canvas.draw_idle()
-            return
-        self.canvas.restore_region(self.background)
-        for artist in self.artists:
-            if artist.get_visible():
-                self.ax.draw_artist(artist)
-        self.canvas.blit(self.fig.bbox)
-
-    def hit(self, px, py):
-        """Index (into node_ids) of the nearest bubble under pixel (px, py), or None."""
-        if len(self.node_xy) == 0:
-            return None
-        pts = self.ax.transData.transform(self.node_xy)   # works for log axes too
-        dist = np.hypot(pts[:, 0] - px, pts[:, 1] - py)
-        radius = np.sqrt(self.node_area / np.pi) * self.fig.dpi / 72.0
-        within = dist <= np.maximum(radius, MIN_HOVER_RADIUS_PX)
-        if not within.any():
-            return None
-        return int(np.argmin(np.where(within, dist, np.inf)))
-
-    def _on_motion(self, event):
-        if event.inaxes is not self.ax or event.button is not None:
-            self._show(None)
-            return
-        k = self.hit(event.x, event.y)
-        self._show(None if k is None else k)
-
-    def _show(self, k):
-        if k == self.current:
-            return
-        self.current = k
-        for artist in self.artists:
-            artist.set_visible(False)
-        if k is not None:
-            xy = self.node_xy[k]
-            self.node_ring.set_offsets([xy])
-            self.node_ring.set_sizes([max(self.node_area[k] * 1.6, 60)])
-            self.node_ring.set_visible(True)
-
-            # keep the box inside the axes: flip it towards the centre (HW3)
-            bbox = self.ax.bbox
-            px, py = self.ax.transData.transform(xy)
-            right = px > bbox.x0 + bbox.width * 0.5
-            top = py > bbox.y0 + bbox.height * 0.5
-            self.annotation.xy = xy
-            self.annotation.set_text(self.node_text(self.node_ids[k]))
-            self.annotation.set_position((-15 if right else 15, -15 if top else 15))
-            self.annotation.set_horizontalalignment('right' if right else 'left')
-            self.annotation.set_verticalalignment('top' if top else 'bottom')
-            self.annotation.set_visible(True)
-        self._blit()
 
 
 class BubblePanel(QtWidgets.QWidget, BaseView):
@@ -224,7 +131,7 @@ class BubblePanel(QtWidgets.QWidget, BaseView):
 
     def _build_plot(self):
         self.ax = ax = self.figure.add_subplot(111)
-        self.figure.subplots_adjust(left=0.08, right=0.80, top=0.93, bottom=0.10)
+        self.figure.subplots_adjust(left=0.09, right=0.72, top=0.93, bottom=0.10)
         ax.set_xscale('log')
         ax.set_yscale('log')
         ax.set_xlim(*X_LIM)
@@ -256,7 +163,7 @@ class BubblePanel(QtWidgets.QWidget, BaseView):
                                  title='Population (millions)')
         ax.add_artist(size_legend.size_legend)
         ax.add_artist(continent_legend(ax))
-        self.figure.text(0.815, 0.10, 'Drag: select countries\nShift+drag: add to selection\n'
+        self.figure.text(0.735, 0.10, 'Drag: select countries\nShift+drag: add to selection\n'
                                       'Click bubble: toggle\nClick empty: clear',
                          fontsize=8.5, color='#666666', va='bottom')
 
@@ -293,7 +200,7 @@ class BubblePanel(QtWidgets.QWidget, BaseView):
         self.bubbles.set_sizes(areas)
         self.bubbles.set_facecolors(face)
         self.bubbles.set_edgecolors(np.where(grey[:, None], [[0, 0, 0, 0]], [[0, 0, 0, 1]]))
-        self.bubbles.set_linewidths(np.where(selected, 1.6, 0.5))
+        self.bubbles.set_linewidths(np.where(selected, SELECTED_LW, UNSELECTED_LW))
 
         self._cur = dict(j=j, x=x, y=y, y_plot=y_plot, valid=valid, capped=capped,
                          pickable=pickable, state=state)
@@ -349,17 +256,9 @@ class BubblePanel(QtWidgets.QWidget, BaseView):
     def _tooltip_text(self, i):
         c = self._cur
         j = c['j']
-        yc = self.YC[i, j]
-        lines = [f'Country:      {self.names[i]} ({c["state"].year})',
-                 f'Continent:    {self.cont[i]}',
-                 f'GDP/person:   ${c["x"][i]:,.0f}',
-                 f'Territorial:  {self.YT[i, j]:.1f} t CO₂/person',
-                 f'Consumption:  {yc:.1f} t CO₂/person' if np.isfinite(yc) else
-                 'Consumption:  no estimate',
-                 f'Population:   {self.P[i, j] / 1e6:,.1f} million']
-        if c['capped'][i]:
-            lines.append('Off scale: drawn at top edge')
-        return '\n'.join(lines)
+        extra = [('Off scale', 'drawn at top edge')] if c['capped'][i] else []
+        return country_text(self.names[i], c['state'].year, self.cont[i], self.YT[i, j],
+                            self.YC[i, j], c['x'][i], self.P[i, j], extra)
 
     def _on_select(self, eclick, erelease):
         # HW2: a near-zero drag is a click. Here a click on a bubble toggles it,
@@ -383,7 +282,3 @@ class BubblePanel(QtWidgets.QWidget, BaseView):
         else:
             self.model.set_selected(self.iso[inside])
 
-
-def _rgb(hex_color):
-    h = hex_color.lstrip('#')
-    return tuple(int(h[k:k + 2], 16) / 255 for k in (0, 2, 4))
