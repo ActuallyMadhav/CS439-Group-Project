@@ -155,7 +155,7 @@ class DecouplingPanel(QtWidgets.QWidget, BaseView):
         n = len(rows)
         ncols = 1 if n <= 1 else 2
         nrows = max(1, int(np.ceil(n / ncols)))
-        self.figure.subplots_adjust(left=0.08, right=0.97, top=0.84, bottom=0.12,
+        self.figure.subplots_adjust(left=0.08, right=0.97, top=0.80, bottom=0.12,
                                     wspace=0.08, hspace=0.32)
 
         self.figure.suptitle('Did growth decouple from emissions? (1990 = 100)',
@@ -233,8 +233,9 @@ class DecouplingPanel(QtWidgets.QWidget, BaseView):
         handles.append(Patch(color=SHADE_COLOR, alpha=SHADE_ALPHA * 2))
         labels.append(f'Decoupled: GDP ≥ +{MIN_GDP_GROWTH:.0%} and {BASIS_LABEL[basis]} '
                       f'CO₂ below 1990')
-        self.figure.legend(handles, labels, loc='upper center', ncol=4, frameon=False,
-                           fontsize=9, bbox_to_anchor=(0.5, 0.935))
+        # two columns, so the legend also fits when the view is half the window wide
+        self.figure.legend(handles, labels, loc='upper center', ncol=2, frameon=False,
+                           fontsize=9, bbox_to_anchor=(0.5, 0.945))
 
     def _y_limits(self, rows):
         vals = np.concatenate([self.idx[k][rows].ravel() for k in SERIES])

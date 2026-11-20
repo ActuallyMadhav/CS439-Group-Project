@@ -108,7 +108,7 @@ The full write-up is in [`findings.md`](findings.md). The headline results for 1
 ![Q3 wealth curve](q3_wealth_curve.png)
 
 ## Still to do, outside this branch
-- **Main window.** Plug `DecouplingPanel(model)` into the combined five-view window. It needs only the shared model and `panel.draw(add_metrics(df))`; the view calls `add_metrics` itself if the columns are missing.
-- **Data pipeline.** When Saanvi's `data.py` replaces `data_minimal.py`, nothing here should need to change as long as the column names stay the same.
+- **Main window.** Done: `main.py` shows `DecouplingPanel` next to the other four views.
+- **Data pipeline.** Done: everything now loads Saanvi's `data.py` (`data_minimal.py` was removed). `scripts/findings_c.py` leaves out the World row; its Q1/Q3 numbers are unchanged.
 - **Tooltip.** Replace the local tooltip with the shared one from Tanisha.
 - **Report.** Write the section on View C, using the design notes and screenshots above.

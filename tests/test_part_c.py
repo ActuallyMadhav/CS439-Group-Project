@@ -13,7 +13,7 @@ import numpy as np
 from matplotlib.backend_bases import MouseEvent
 from PyQt5.QtWidgets import QApplication
 
-from data_minimal import load_table
+from data import load_table
 from metrics import add_metrics
 from selection import SelectionModel, YEAR_MAX, YEAR_MIN
 from views.decoupling_view import DEFAULT_COUNTRIES, MAX_PANELS, DecouplingPanel, runs

@@ -222,8 +222,17 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-#data files
-data/raw/
+# data files: raw downloads (scripts/download_data.py) and the built shared table
+# (scripts/build_data.py) are regenerated, never committed
+data/
+
+# local course material: proposal, professor's note, homeworks.
+# docs/view_c/ holds View C's findings and screenshots, so it stays tracked.
+docs/*
+!docs/view_c/
+
+# IDE settings (PyCharm)
+.idea/
 
 # ds store
 *.DS_Store
