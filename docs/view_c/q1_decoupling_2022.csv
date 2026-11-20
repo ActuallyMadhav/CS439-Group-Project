@@ -1,0 +1,164 @@
+iso3,country,continent,category,gdp_change_%,terr_co2_change_%,cons_co2_change_%,basis_gap_pts,terr_class,cons_class
+EST,Estonia,Europe,Decoupled on both bases,48.0,-68.0,-53.0,14.0,absolute,absolute
+LVA,Latvia,Europe,Decoupled on both bases,22.0,-66.0,-32.0,34.0,absolute,absolute
+LTU,Lithuania,Europe,Decoupled on both bases,66.0,-64.0,-47.0,17.0,absolute,absolute
+ROU,Romania,Europe,Decoupled on both bases,294.0,-61.0,-50.0,11.0,absolute,absolute
+SVK,Slovakia,Europe,Decoupled on both bases,131.0,-49.0,-47.0,2.0,absolute,absolute
+GBR,United Kingdom,Europe,Decoupled on both bases,74.0,-48.0,-25.0,23.0,absolute,absolute
+DNK,Denmark,Europe,Decoupled on both bases,98.0,-45.0,-13.0,31.0,absolute,absolute
+CZE,Czechia,Europe,Decoupled on both bases,135.0,-42.0,-27.0,16.0,absolute,absolute
+KGZ,Kyrgyzstan,Asia,Decoupled on both bases,26.0,-39.0,-6.0,33.0,absolute,absolute
+BGR,Bulgaria,Europe,Decoupled on both bases,74.0,-39.0,-32.0,6.0,absolute,absolute
+LUX,Luxembourg,Europe,Decoupled on both bases,157.0,-38.0,-33.0,6.0,absolute,absolute
+HUN,Hungary,Europe,Decoupled on both bases,167.0,-38.0,-29.0,9.0,absolute,absolute
+DEU,Germany,Europe,Decoupled on both bases,94.0,-36.0,-30.0,6.0,absolute,absolute
+FIN,Finland,Europe,Decoupled on both bases,69.0,-36.0,-41.0,-5.0,absolute,absolute
+SWE,Sweden,Europe,Decoupled on both bases,106.0,-35.0,-40.0,-6.0,absolute,absolute
+RUS,Russia,Europe,Decoupled on both bases,103.0,-34.0,-38.0,-3.0,absolute,absolute
+GRC,Greece,Europe,Decoupled on both bases,63.0,-31.0,-23.0,8.0,absolute,absolute
+FRA,France,Europe,Decoupled on both bases,63.0,-25.0,-10.0,15.0,absolute,absolute
+ITA,Italy,Europe,Decoupled on both bases,45.0,-23.0,-18.0,5.0,absolute,absolute
+NLD,Netherlands,Europe,Decoupled on both bases,114.0,-22.0,-10.0,12.0,absolute,absolute
+POL,Poland,Europe,Decoupled on both bases,296.0,-16.0,-8.0,9.0,absolute,absolute
+SVN,Slovenia,Europe,Decoupled on both bases,93.0,-16.0,-4.0,11.0,absolute,absolute
+JPN,Japan,Asia,Decoupled on both bases,29.0,-11.0,-12.0,-1.0,absolute,absolute
+PRT,Portugal,Europe,Decoupled on both bases,73.0,-10.0,-5.0,6.0,absolute,absolute
+JAM,Jamaica,North America,Decoupled on both bases,41.0,-7.0,-12.0,-5.0,absolute,absolute
+AUT,Austria,Europe,Decoupled on both bases,92.0,-2.0,-6.0,-4.0,absolute,absolute
+BLR,Belarus,Europe,Territorial only (cut partly moved abroad),50.0,-47.0,4.0,52.0,absolute,relative
+MLT,Malta,Europe,Territorial only (cut partly moved abroad),284.0,-27.0,391.0,418.0,absolute,none
+BEL,Belgium,Europe,Territorial only (cut partly moved abroad),79.0,-26.0,71.0,97.0,absolute,relative
+CHE,Switzerland,Europe,Territorial only (cut partly moved abroad),139.0,-25.0,44.0,69.0,absolute,relative
+HRV,Croatia,Europe,Territorial only (cut partly moved abroad),75.0,-23.0,19.0,42.0,absolute,relative
+ZWE,Zimbabwe,Africa,Territorial only (cut partly moved abroad),18.0,-21.0,15.0,36.0,absolute,relative
+ALB,Albania,Europe,Territorial only (cut partly moved abroad),179.0,-21.0,0.0,21.0,absolute,relative
+AZE,Azerbaijan,Asia,Territorial only (cut partly moved abroad),229.0,-20.0,28.0,48.0,absolute,relative
+ARM,Armenia,Asia,Territorial only (cut partly moved abroad),22.0,-19.0,34.0,53.0,absolute,none
+TJK,Tajikistan,Asia,Territorial only (cut partly moved abroad),100.0,-15.0,144.0,159.0,absolute,none
+USA,United States,North America,Territorial only (cut partly moved abroad),111.0,-1.0,10.0,12.0,absolute,relative
+KAZ,Kazakhstan,Asia,Consumption only,158.0,3.0,-25.0,-27.0,relative,absolute
+UKR,Ukraine,Europe,Not decoupled,-38.0,-80.0,-67.0,12.0,no growth,no growth
+GEO,Georgia,Asia,Not decoupled,7.0,-18.0,65.0,84.0,no growth,no growth
+VEN,Venezuela,South America,Not decoupled,-42.0,-11.0,0.0,11.0,no growth,no growth
+ESP,Spain,Europe,Not decoupled,115.0,2.0,3.0,1.0,relative,relative
+SGP,Singapore,Asia,Not decoupled,569.0,10.0,210.0,200.0,relative,relative
+IRL,Ireland,Europe,Not decoupled,367.0,11.0,14.0,3.0,relative,relative
+HKG,Hong Kong,Asia,Not decoupled,124.0,12.0,134.0,122.0,relative,none
+CAN,Canada,North America,Not decoupled,111.0,19.0,6.0,-13.0,relative,relative
+NZL,New Zealand,Oceania,Not decoupled,169.0,25.0,57.0,32.0,relative,relative
+ZAF,South Africa,Africa,Not decoupled,208.0,35.0,0.0,-35.0,relative,relative
+AUS,Australia,Oceania,Not decoupled,190.0,39.0,50.0,10.0,relative,relative
+MEX,Mexico,North America,Not decoupled,147.0,47.0,75.0,27.0,relative,relative
+CYP,Cyprus,Asia,Not decoupled,223.0,53.0,61.0,8.0,relative,relative
+ARG,Argentina,South America,Not decoupled,152.0,65.0,60.0,-5.0,relative,relative
+ISR,Israel,Asia,Not decoupled,261.0,75.0,73.0,-2.0,relative,relative
+COL,Colombia,South America,Not decoupled,193.0,81.0,92.0,11.0,relative,relative
+URY,Uruguay,South America,Not decoupled,116.0,87.0,117.0,29.0,relative,none
+TTO,Trinidad and Tobago,North America,Not decoupled,112.0,95.0,36.0,-60.0,relative,relative
+TUN,Tunisia,Africa,Not decoupled,197.0,108.0,130.0,22.0,relative,relative
+BRA,Brazil,South America,Not decoupled,169.0,120.0,95.0,-25.0,relative,relative
+TWN,Taiwan,Asia,Not decoupled,291.0,121.0,266.0,146.0,relative,relative
+ECU,Ecuador,South America,Not decoupled,173.0,121.0,189.0,68.0,relative,none
+JOR,Jordan,Asia,Not decoupled,404.0,124.0,78.0,-46.0,relative,relative
+BOL,Bolivia,South America,Not decoupled,240.0,133.0,187.0,54.0,relative,relative
+KOR,South Korea,Asia,Not decoupled,259.0,142.0,118.0,-24.0,relative,relative
+MWI,Malawi,Africa,Not decoupled,222.0,145.0,359.0,214.0,relative,none
+CHL,Chile,South America,Not decoupled,235.0,150.0,178.0,29.0,relative,relative
+NIC,Nicaragua,North America,Not decoupled,292.0,169.0,211.0,42.0,relative,relative
+TGO,Togo,Africa,Not decoupled,201.0,171.0,811.0,641.0,relative,none
+KWT,Kuwait,Asia,Not decoupled,948.0,174.0,200.0,26.0,relative,relative
+BWA,Botswana,Africa,Not decoupled,490.0,174.0,416.0,241.0,relative,relative
+CRI,Costa Rica,North America,Not decoupled,251.0,176.0,199.0,22.0,relative,relative
+TUR,Turkey,Asia,Not decoupled,390.0,187.0,110.0,-77.0,relative,relative
+PER,Peru,South America,Not decoupled,230.0,187.0,227.0,40.0,relative,relative
+MUS,Mauritius,Africa,Not decoupled,121.0,193.0,294.0,101.0,none,none
+PAK,Pakistan,Asia,Not decoupled,355.0,202.0,244.0,42.0,relative,relative
+MAR,Morocco,Africa,Not decoupled,205.0,212.0,139.0,-72.0,none,relative
+THA,Thailand,Asia,Not decoupled,176.0,213.0,154.0,-59.0,none,relative
+SLV,El Salvador,North America,Not decoupled,243.0,218.0,183.0,-35.0,relative,relative
+CIV,Cote d'Ivoire,Africa,Not decoupled,367.0,223.0,228.0,5.0,relative,relative
+CMR,Cameroon,Africa,Not decoupled,261.0,228.0,191.0,-36.0,relative,relative
+EGY,Egypt,Africa,Not decoupled,541.0,235.0,231.0,-3.0,relative,relative
+NGA,Nigeria,Africa,Not decoupled,562.0,236.0,291.0,55.0,relative,relative
+SAU,Saudi Arabia,Asia,Not decoupled,692.0,236.0,243.0,7.0,relative,relative
+BHR,Bahrain,Asia,Not decoupled,1695.0,237.0,115.0,-122.0,relative,relative
+DOM,Dominican Republic,North America,Not decoupled,585.0,244.0,553.0,309.0,relative,relative
+RWA,Rwanda,Africa,Not decoupled,192.0,253.0,429.0,176.0,none,none
+KEN,Kenya,Africa,Not decoupled,358.0,253.0,386.0,133.0,relative,none
+MNG,Mongolia,Asia,Not decoupled,895.0,257.0,262.0,6.0,relative,relative
+PHL,Philippines,Asia,Not decoupled,345.0,263.0,299.0,37.0,relative,relative
+PRY,Paraguay,South America,Not decoupled,193.0,270.0,280.0,11.0,none,none
+IRN,Iran,Asia,Not decoupled,394.0,276.0,215.0,-60.0,relative,relative
+GTM,Guatemala,North America,Not decoupled,216.0,298.0,489.0,190.0,none,none
+ARE,United Arab Emirates,Asia,Not decoupled,1818.0,307.0,360.0,53.0,relative,relative
+PAN,Panama,North America,Not decoupled,456.0,313.0,608.0,295.0,relative,none
+GIN,Guinea,Africa,Not decoupled,374.0,330.0,419.0,89.0,relative,none
+LKA,Sri Lanka,Asia,Not decoupled,280.0,330.0,1245.0,915.0,none,none
+ZMB,Zambia,Africa,Not decoupled,568.0,338.0,621.0,283.0,relative,none
+MDG,Madagascar,Africa,Not decoupled,163.0,340.0,431.0,91.0,none,none
+CHN,China,Asia,Not decoupled,697.0,370.0,340.0,-30.0,relative,relative
+HND,Honduras,North America,Not decoupled,250.0,375.0,436.0,60.0,none,none
+IDN,Indonesia,Asia,Not decoupled,387.0,378.0,374.0,-4.0,relative,relative
+SEN,Senegal,Africa,Not decoupled,225.0,381.0,487.0,107.0,none,none
+IND,India,Asia,Not decoupled,498.0,383.0,297.0,-86.0,relative,relative
+MYS,Malaysia,Asia,Not decoupled,513.0,421.0,292.0,-129.0,relative,relative
+GHA,Ghana,Africa,Not decoupled,457.0,482.0,487.0,5.0,none,none
+ETH,Ethiopia,Africa,Not decoupled,500.0,496.0,661.0,164.0,relative,none
+OMN,Oman,Asia,Not decoupled,869.0,589.0,557.0,-33.0,relative,relative
+BGD,Bangladesh,Asia,Not decoupled,665.0,633.0,1060.0,427.0,relative,none
+UGA,Uganda,Africa,Not decoupled,527.0,709.0,588.0,-121.0,none,none
+QAT,Qatar,Asia,Not decoupled,7211.0,805.0,575.0,-230.0,relative,relative
+TZA,Tanzania,Africa,Not decoupled,798.0,840.0,793.0,-47.0,none,relative
+BFA,Burkina Faso,Africa,Not decoupled,247.0,902.0,531.0,-371.0,none,none
+MOZ,Mozambique,Africa,Not decoupled,40.0,934.0,860.0,-75.0,none,none
+BEN,Benin,Africa,Not decoupled,282.0,999.0,713.0,-285.0,none,none
+VNM,Vietnam,Asia,Not decoupled,658.0,1405.0,870.0,-535.0,none,none
+KHM,Cambodia,Asia,Not decoupled,396.0,1559.0,1844.0,285.0,none,none
+NPL,Nepal,Asia,Not decoupled,291.0,2032.0,3726.0,1694.0,none,none
+LAO,Laos,Asia,Not decoupled,781.0,4295.0,894.0,-3401.0,none,none
+MDA,Moldova,Europe,No consumption estimate,-45.0,-86.0,,,no growth,no data
+PRK,North Korea,Asia,No consumption estimate,-19.0,-52.0,,,no growth,no data
+MKD,North Macedonia,Europe,No consumption estimate,69.0,-35.0,,,absolute,no data
+CUB,Cuba,North America,No consumption estimate,68.0,-28.0,,,absolute,no data
+SYR,Syria,Asia,No consumption estimate,-54.0,-27.0,,,no growth,no data
+SRB,Serbia,Europe,No consumption estimate,54.0,-24.0,,,absolute,no data
+GAB,Gabon,Africa,No consumption estimate,402.0,1.0,,,relative,no data
+BIH,Bosnia and Herzegovina,Europe,No consumption estimate,81.0,4.0,,,relative,no data
+MNE,Montenegro,Europe,No consumption estimate,232.0,5.0,,,relative,no data
+LBY,Libya,Africa,No consumption estimate,349.0,6.0,,,relative,no data
+SWZ,Eswatini,Africa,No consumption estimate,181.0,6.0,,,relative,no data
+NOR,Norway,Europe,No consumption estimate,286.0,17.0,,,relative,no data
+UZB,Uzbekistan,Asia,No consumption estimate,182.0,17.0,,,relative,no data
+BRB,Barbados,North America,No consumption estimate,0.0,27.0,,,no growth,no data
+COD,Democratic Republic of Congo,Africa,No consumption estimate,188.0,33.0,,,relative,no data
+LBR,Liberia,Africa,No consumption estimate,15.0,49.0,,,none,no data
+ISL,Iceland,Europe,No consumption estimate,119.0,62.0,,,relative,no data
+DJI,Djibouti,Africa,No consumption estimate,195.0,93.0,,,relative,no data
+LBN,Lebanon,Asia,No consumption estimate,401.0,104.0,,,relative,no data
+YEM,Yemen,Asia,No consumption estimate,35.0,119.0,,,none,no data
+CAF,Central African Republic,Africa,No consumption estimate,19.0,120.0,,,none,no data
+LSO,Lesotho,Africa,No consumption estimate,49.0,150.0,,,none,no data
+DZA,Algeria,Africa,No consumption estimate,406.0,151.0,,,relative,no data
+TKM,Turkmenistan,Asia,No consumption estimate,360.0,171.0,,,relative,no data
+SLE,Sierra Leone,Africa,No consumption estimate,69.0,171.0,,,none,no data
+HTI,Haiti,North America,No consumption estimate,63.0,176.0,,,none,no data
+DMA,Dominica,North America,No consumption estimate,145.0,180.0,,,none,no data
+STP,Sao Tome and Principe,Africa,No consumption estimate,221.0,183.0,,,relative,no data
+LCA,Saint Lucia,North America,No consumption estimate,144.0,184.0,,,none,no data
+CPV,Cape Verde,Africa,No consumption estimate,536.0,220.0,,,relative,no data
+GNB,Guinea-Bissau,Africa,No consumption estimate,158.0,271.0,,,none,no data
+GMB,Gambia,Africa,No consumption estimate,250.0,305.0,,,none,no data
+SYC,Seychelles,Africa,No consumption estimate,422.0,309.0,,,relative,no data
+AGO,Angola,Africa,No consumption estimate,1279.0,326.0,,,relative,no data
+AFG,Afghanistan,Asia,No consumption estimate,308.0,344.0,,,none,no data
+IRQ,Iraq,Asia,No consumption estimate,643.0,353.0,,,relative,no data
+BDI,Burundi,Africa,No consumption estimate,52.0,369.0,,,none,no data
+NER,Niger,Africa,No consumption estimate,262.0,426.0,,,none,no data
+PSE,Palestine,Asia,No consumption estimate,137.0,439.0,,,none,no data
+MRT,Mauritania,Africa,No consumption estimate,439.0,529.0,,,none,no data
+TCD,Chad,Africa,No consumption estimate,497.0,597.0,,,none,no data
+MMR,Myanmar,Asia,No consumption estimate,492.0,636.0,,,none,no data
+COG,Congo,Africa,No consumption estimate,175.0,647.0,,,none,no data
+COM,Comoros,Africa,No consumption estimate,258.0,752.0,,,none,no data
+MLI,Mali,Africa,No consumption estimate,217.0,1555.0,,,none,no data
+GNQ,Equatorial Guinea,Africa,No consumption estimate,2100.0,10667.0,,,none,no data
